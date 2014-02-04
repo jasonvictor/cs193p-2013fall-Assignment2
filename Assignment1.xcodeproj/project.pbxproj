@@ -22,6 +22,12 @@
 		F1E9D92F18A154C00009C4AA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1E9D90E18A154BE0009C4AA /* UIKit.framework */; };
 		F1E9D93718A154C00009C4AA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F1E9D93518A154C00009C4AA /* InfoPlist.strings */; };
 		F1E9D93918A154C00009C4AA /* Assignment1Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = F1E9D93818A154C00009C4AA /* Assignment1Tests.m */; };
+		F1E9D94418A155330009C4AA /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = F1E9D94318A155330009C4AA /* Card.m */; };
+		F1E9D94718A18DD80009C4AA /* GameCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1E9D94618A18DD80009C4AA /* GameCardViewController.m */; };
+		F1E9D94C18A18F150009C4AA /* blank card hi-res.png in Resources */ = {isa = PBXBuildFile; fileRef = F1E9D94818A18F150009C4AA /* blank card hi-res.png */; };
+		F1E9D94D18A18F150009C4AA /* blank card rounded corner.png in Resources */ = {isa = PBXBuildFile; fileRef = F1E9D94918A18F150009C4AA /* blank card rounded corner.png */; };
+		F1E9D94E18A18F150009C4AA /* stanford-tree.png in Resources */ = {isa = PBXBuildFile; fileRef = F1E9D94A18A18F150009C4AA /* stanford-tree.png */; };
+		F1E9D94F18A18F150009C4AA /* stanford.png in Resources */ = {isa = PBXBuildFile; fileRef = F1E9D94B18A18F150009C4AA /* stanford.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +61,14 @@
 		F1E9D93418A154C00009C4AA /* Assignment1Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Assignment1Tests-Info.plist"; sourceTree = "<group>"; };
 		F1E9D93618A154C00009C4AA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F1E9D93818A154C00009C4AA /* Assignment1Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Assignment1Tests.m; sourceTree = "<group>"; };
+		F1E9D94218A155330009C4AA /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
+		F1E9D94318A155330009C4AA /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
+		F1E9D94518A18DD80009C4AA /* GameCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCardViewController.h; sourceTree = "<group>"; };
+		F1E9D94618A18DD80009C4AA /* GameCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCardViewController.m; sourceTree = "<group>"; };
+		F1E9D94818A18F150009C4AA /* blank card hi-res.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blank card hi-res.png"; sourceTree = "<group>"; };
+		F1E9D94918A18F150009C4AA /* blank card rounded corner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blank card rounded corner.png"; sourceTree = "<group>"; };
+		F1E9D94A18A18F150009C4AA /* stanford-tree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stanford-tree.png"; sourceTree = "<group>"; };
+		F1E9D94B18A18F150009C4AA /* stanford.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stanford.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,14 +128,16 @@
 		F1E9D91018A154BE0009C4AA /* Assignment1 */ = {
 			isa = PBXGroup;
 			children = (
-				F1E9D91918A154BE0009C4AA /* MatchismoAppDelegate.h */,
-				F1E9D91A18A154BE0009C4AA /* MatchismoAppDelegate.m */,
 				F1E9D91C18A154BE0009C4AA /* Main_iPhone.storyboard */,
-				F1E9D91F18A154BE0009C4AA /* Main_iPad.storyboard */,
+				F1E9D94518A18DD80009C4AA /* GameCardViewController.h */,
+				F1E9D94618A18DD80009C4AA /* GameCardViewController.m */,
 				F1E9D92218A154BE0009C4AA /* MatchismoViewController.h */,
 				F1E9D92318A154BE0009C4AA /* MatchismoViewController.m */,
+				F1E9D94218A155330009C4AA /* Card.h */,
+				F1E9D94318A155330009C4AA /* Card.m */,
 				F1E9D92518A154C00009C4AA /* Images.xcassets */,
 				F1E9D91118A154BE0009C4AA /* Supporting Files */,
+				F1E9D95018A18F630009C4AA /* Images */,
 			);
 			path = Assignment1;
 			sourceTree = "<group>";
@@ -129,6 +145,9 @@
 		F1E9D91118A154BE0009C4AA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F1E9D91918A154BE0009C4AA /* MatchismoAppDelegate.h */,
+				F1E9D91A18A154BE0009C4AA /* MatchismoAppDelegate.m */,
+				F1E9D91F18A154BE0009C4AA /* Main_iPad.storyboard */,
 				F1E9D91218A154BE0009C4AA /* Assignment1-Info.plist */,
 				F1E9D91318A154BE0009C4AA /* InfoPlist.strings */,
 				F1E9D91618A154BE0009C4AA /* main.m */,
@@ -153,6 +172,18 @@
 				F1E9D93518A154C00009C4AA /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F1E9D95018A18F630009C4AA /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				F1E9D94818A18F150009C4AA /* blank card hi-res.png */,
+				F1E9D94918A18F150009C4AA /* blank card rounded corner.png */,
+				F1E9D94A18A18F150009C4AA /* stanford-tree.png */,
+				F1E9D94B18A18F150009C4AA /* stanford.png */,
+			);
+			name = Images;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,8 +263,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1E9D94F18A18F150009C4AA /* stanford.png in Resources */,
+				F1E9D94E18A18F150009C4AA /* stanford-tree.png in Resources */,
 				F1E9D92118A154BE0009C4AA /* Main_iPad.storyboard in Resources */,
 				F1E9D92618A154C00009C4AA /* Images.xcassets in Resources */,
+				F1E9D94D18A18F150009C4AA /* blank card rounded corner.png in Resources */,
+				F1E9D94C18A18F150009C4AA /* blank card hi-res.png in Resources */,
 				F1E9D91E18A154BE0009C4AA /* Main_iPhone.storyboard in Resources */,
 				F1E9D91518A154BE0009C4AA /* InfoPlist.strings in Resources */,
 			);
@@ -254,9 +289,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1E9D94718A18DD80009C4AA /* GameCardViewController.m in Sources */,
 				F1E9D91B18A154BE0009C4AA /* MatchismoAppDelegate.m in Sources */,
 				F1E9D92418A154BE0009C4AA /* MatchismoViewController.m in Sources */,
 				F1E9D91718A154BE0009C4AA /* main.m in Sources */,
+				F1E9D94418A155330009C4AA /* Card.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
