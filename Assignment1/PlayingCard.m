@@ -19,7 +19,7 @@
 
 
 + (NSArray *)validSuits {
-    return @[@"♥️", @"♦️", @"♠️", @"♣️"];
+    return @[@"♥️", @"♦️", @"♠︎", @"♣︎"];
 }
 
 - (void) setSuit:(NSString *)suit {
@@ -46,6 +46,23 @@
         _rank = rank;
     }
 }
+
+-(int) match:(NSArray *) otherCards
+{
+    int score = 0;
+    //Only match against 1 other card for now
+    if ([otherCards count] == 1) {
+        //Assuming one card for now
+        PlayingCard *otherCard = [otherCards firstObject];
+        if (otherCard.rank == self.rank) {
+            score = 4;
+        } else if ([otherCard.suit isEqualToString:self.suit]) {
+            score = 1;
+        }
+    }
+    return score;
+}
+
 
 
 @end
