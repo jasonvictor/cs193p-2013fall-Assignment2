@@ -47,6 +47,10 @@
     }
 }
 
+
+static const int MATCH_RANK_SCORE = 4;
+static const int MATCH_SUIT_SCORE = 1;
+
 -(int) match:(NSArray *) otherCards
 {
     int score = 0;
@@ -55,9 +59,9 @@
         //Assuming one card for now
         PlayingCard *otherCard = [otherCards firstObject];
         if (otherCard.rank == self.rank) {
-            score = 4;
+            score = MATCH_RANK_SCORE;
         } else if ([otherCard.suit isEqualToString:self.suit]) {
-            score = 1;
+            score = MATCH_SUIT_SCORE;
         }
     }
     return score;
