@@ -24,6 +24,10 @@
     return _game;
 }
 
+- (IBAction)switchGameMode:(UISegmentedControl *)sender {
+    //Note that the index starts at 0, so if our lowest mode is 2, we can simply add 2 to it
+    [self.game setGameMode:[[NSNumber alloc] initWithInt:(sender.selectedSegmentIndex + 2)]];
+}
 
 - (Deck *) createDeck {
     return [[PlayingCardDeck alloc] init];

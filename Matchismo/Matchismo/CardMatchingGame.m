@@ -11,9 +11,8 @@
 @interface CardMatchingGame()
 @property (nonatomic, readwrite) NSInteger score;
 @property (nonatomic, strong) NSMutableArray *cards; //of card
-
+@property (nonatomic, strong) NSNumber * gameMode; //# of cards to match
 @end
-
 
 
 
@@ -22,6 +21,7 @@
 static const int MISMATCH_PENALTY = 2;
 static const int MATCH_BONUS = 4;
 static const int COST_TO_CHOOSE = 1;
+static const int PARTIAL_MATCH = 2;
 
 -(NSMutableArray *)cards {
     if (!_cards) _cards = [[NSMutableArray alloc] init];
@@ -31,6 +31,19 @@ static const int COST_TO_CHOOSE = 1;
 -(void) resetGame {
     self.score = 0;
     self.cards = nil;
+}
+
+-(void) setGameMode:(NSNumber *)matchCount {
+    //default is 2; 2 or 3 is valid; check for invalid values
+    _gameMode = @2;
+    NSArray * validMatchModes = @[@2, @3];
+    for (NSNumber *mode in validMatchModes) {
+        if ([mode isEqualToNumber:matchCount]) {
+            _gameMode = mode;
+            break;
+        }
+    }
+    //NSLog(@"game mode = %@ cards", self.gameMode);
 }
 
 - (instancetype) initWithCardCount:(NSUInteger)count
@@ -55,7 +68,7 @@ static const int COST_TO_CHOOSE = 1;
     return (index < [self.cards count]) ? self.cards[index] : nil;
 }
 
-
+//TODO - implement change in logic for matches w/ three cards
 - (void) chooseCardAtIndex:(NSUInteger)index {
     
     Card *card = [self cardAtIndex:index];
