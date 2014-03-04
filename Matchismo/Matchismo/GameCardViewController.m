@@ -48,6 +48,11 @@
     }
     
 }
+- (IBAction)redealButton:(UIButton *)sender {
+    [self.game resetGame];
+    [self updateUI];
+    self.game = nil;
+}
 
 -(NSString *) titleForCard:(Card *)card {
     return card.isChosen ? card.contents : @"";

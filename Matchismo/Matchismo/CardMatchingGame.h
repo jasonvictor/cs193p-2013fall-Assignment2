@@ -18,6 +18,7 @@
 
 -(void)chooseCardAtIndex:(NSUInteger)index;
 -(Card *)cardAtIndex:(NSUInteger)index;
+-(void)resetGame;
 
 @property (nonatomic, readonly) NSInteger score;
 

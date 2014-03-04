@@ -28,6 +28,11 @@ static const int COST_TO_CHOOSE = 1;
     return _cards;
 }
 
+-(void) resetGame {
+    self.score = 0;
+    self.cards = nil;
+}
+
 - (instancetype) initWithCardCount:(NSUInteger)count
                          usingDeck:(Deck *)deck
 {
@@ -82,10 +87,6 @@ static const int COST_TO_CHOOSE = 1;
             card.chosen = YES;
         }
 
-        
-        
-    
-    
     }
     
 }
