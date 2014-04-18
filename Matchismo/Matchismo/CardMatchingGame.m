@@ -69,11 +69,18 @@ static const int PARTIAL_MATCH = 2;
     return (index < [self.cards count]) ? self.cards[index] : nil;
 }
 
-//TODO - implement change in logic for matches w/ three cards
+
+
 - (void) chooseCardAtIndex:(NSUInteger)index {
     
     Card *card = [self cardAtIndex:index];
-    NSMutableArray * selectedCards = [[NSMutableArray alloc] initWithArray:@[card]];
+    NSMutableArray * selectedCards;
+
+    /*
+    if (card) {
+        selectedCards = [[NSMutableArray alloc] initWithArray:@[card]];
+    }
+     */
     
     if (!card.isMatched) {
         if (card.isChosen) {
@@ -86,7 +93,7 @@ static const int PARTIAL_MATCH = 2;
                     //Add the card to the matched array (you need this for displaying attempts)
                     [selectedCards addObject:otherCard];
                     
-                    int matchScore = [card match:(Card *)otherCard];
+                    int matchScore = [card match:(Card *)@[otherCard]];
                     if (matchScore) {
                         otherCard.matched = YES;
                         card.matched = YES;
@@ -100,7 +107,7 @@ static const int PARTIAL_MATCH = 2;
             
             
             //If enough cards are chosen...
-            if ((int)self.gameMode <= selectedCards.count) {
+            if ((int)self.gameMode <= selectedCards.count-1) {
                 
                 //if there's a match
                 if (matchScore) {
