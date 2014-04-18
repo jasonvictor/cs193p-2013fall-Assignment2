@@ -103,13 +103,13 @@ static const int PARTIAL_MATCH = 2;
             }
             
             int matchScore = [card match:(Card *)selectedCards];  // send all selected cards to the matcher
-            self.score = matchScore;
+            self.score += matchScore;
             
             
             //If enough cards are chosen...
             if ((int)self.gameMode <= selectedCards.count-1) {
                 
-                //if there's a match
+                //if there's a match, figure out score
                 if (matchScore) {
                     //if there were matches but matches were lower than possible, give partial credit
                     if (matchScore < (int)self.gameMode) {
@@ -118,9 +118,17 @@ static const int PARTIAL_MATCH = 2;
                     else { //give full bonus
                         self.score *= MATCH_BONUS;
                     }
+                 
+                    //Mark
                     
                 } else {
                     self.score -= MISMATCH_PENALTY;
+                    //Reset the cards
+                    card.chosen = NO;
+                    for (Card * notMatchingCard in selectedCards) {
+                        notMatchingCard.chosen = NO;
+                        notMatchingCard.matched = NO;
+                    }
                 }
                 
             }
