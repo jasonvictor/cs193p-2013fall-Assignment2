@@ -47,6 +47,11 @@ static const int PARTIAL_MATCH = 2;
     NSLog(@"game mode = %@ matches", self.gameMode);
 }
 
+-(NSNumber *) getGameMode {
+    if (!_gameMode) { _gameMode = @2; }
+    return _gameMode;
+}
+
 - (instancetype) initWithCardCount:(NSUInteger)count
                          usingDeck:(Deck *)deck
 {
@@ -74,7 +79,7 @@ static const int PARTIAL_MATCH = 2;
 - (void) chooseCardAtIndex:(NSUInteger)index {
     
     Card *card = [self cardAtIndex:index];
-    NSMutableArray * selectedCards;
+    NSMutableArray * selectedCards = [[NSMutableArray alloc] init];
 
     /*
     if (card) {
@@ -113,10 +118,10 @@ static const int PARTIAL_MATCH = 2;
                 if (matchScore) {
                     //if there were matches but matches were lower than possible, give partial credit
                     if (matchScore < (int)self.gameMode) {
-                        self.score *= PARTIAL_MATCH;
+                        self.score += matchScore * PARTIAL_MATCH;
                     }
                     else { //give full bonus
-                        self.score *= MATCH_BONUS;
+                        self.score += matchScore * MATCH_BONUS;
                     }
                  
                     //Mark
@@ -124,10 +129,10 @@ static const int PARTIAL_MATCH = 2;
                 } else {
                     self.score -= MISMATCH_PENALTY;
                     //Reset the cards
-                    card.chosen = NO;
+                    //card.chosen = NO;
                     for (Card * notMatchingCard in selectedCards) {
                         notMatchingCard.chosen = NO;
-                        notMatchingCard.matched = NO;
+                        //notMatchingCard.matched = NO;
                     }
                 }
                 
