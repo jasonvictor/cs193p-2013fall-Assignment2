@@ -26,7 +26,7 @@
 
 - (IBAction)switchGameMode:(UISegmentedControl *)sender {
     //Note that the index starts at 0, so if our lowest mode is 2, we can simply add 2 to it
-    [self.game setGameMode:[[NSNumber alloc] initWithInt:(sender.selectedSegmentIndex + 2)]];
+    [self.game setGameMode:[[NSNumber alloc] initWithInteger:(sender.selectedSegmentIndex + 2)]];
 }
 
 - (Deck *) createDeck {
@@ -37,7 +37,7 @@
 - (IBAction)touchCardButton:(UIButton *)sender {
 
     int chosenButtonIndex = [self.cardButtons indexOfObject:sender];
-    [self.game chooseCardAtIndex:chosenButtonIndex];
+    [self.game chooseCardAtIndex:(int)chosenButtonIndex];
     [self updateUI];
 }
 

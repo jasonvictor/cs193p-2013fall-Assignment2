@@ -35,14 +35,16 @@ static const int PARTIAL_MATCH = 2;
 -(void) setGameMode:(NSNumber *)matchCount {
     //default is 2; 2 or 3 is valid; check for invalid values
     _gameMode = @2;
+    
     NSArray * validMatchModes = @[@2, @3];
+    
     for (NSNumber *mode in validMatchModes) {
         if ([mode isEqualToNumber:matchCount]) {
             _gameMode = mode;
             break;
         }
     }
-    //NSLog(@"game mode = %@ cards", self.gameMode);
+    NSLog(@"game mode = %@ matches", self.gameMode);
 }
 
 - (instancetype) initWithCardCount:(NSUInteger)count
@@ -71,37 +73,57 @@ static const int PARTIAL_MATCH = 2;
 - (void) chooseCardAtIndex:(NSUInteger)index {
     
     Card *card = [self cardAtIndex:index];
+    NSMutableArray * selectedCards = [[NSMutableArray alloc] initWithArray:@[card]];
+    
     if (!card.isMatched) {
         if (card.isChosen) {
             card.chosen = NO;
         } else {
-            //match against other chosen cards
-            
             for (Card *otherCard in self.cards) {
+                
                 if (otherCard.isChosen && !otherCard.isMatched) {
                     
-                    int matchScore = [card match:@[otherCard]];
-                                      
+                    //Add the card to the matched array (you need this for displaying attempts)
+                    [selectedCards addObject:otherCard];
+                    
+                    int matchScore = [card match:(Card *)otherCard];
                     if (matchScore) {
-                        self.score += matchScore * MATCH_BONUS;
                         otherCard.matched = YES;
                         card.matched = YES;
                     }
-                    else {
-                        self.score -= MISMATCH_PENALTY;
-                        otherCard.chosen = NO;
-                        //if we allow more than 2 card matches, we might not want to do this.
-                    }
-                    break; //can only choose 2 cards for now
+                    
                 }
             }
-            self.score -= COST_TO_CHOOSE;
-            card.chosen = YES;
+            
+            int matchScore = [card match:(Card *)selectedCards];  // send all selected cards to the matcher
+            self.score = matchScore;
+            
+            
+            //If enough cards are chosen...
+            if ((int)self.gameMode <= selectedCards.count) {
+                
+                //if there's a match
+                if (matchScore) {
+                    //if there were matches but matches were lower than possible, give partial credit
+                    if (matchScore < (int)self.gameMode) {
+                        self.score *= PARTIAL_MATCH;
+                    }
+                    else { //give full bonus
+                        self.score *= MATCH_BONUS;
+                    }
+                    
+                } else {
+                    self.score -= MISMATCH_PENALTY;
+                }
+                
+            }
         }
-
+        self.score -= COST_TO_CHOOSE;
+        card.chosen = YES;
     }
     
 }
+
 
 
 

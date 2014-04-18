@@ -55,7 +55,7 @@ static const int MATCH_SUIT_SCORE = 1;
 {
     int score = 0;
     //Only match against 1 other card for now
-    if ([otherCards count] == 1) {
+	    if ([otherCards count] == 1) {
         //Assuming one card for now
         PlayingCard *otherCard = [otherCards firstObject];
         if (otherCard.rank == self.rank) {
