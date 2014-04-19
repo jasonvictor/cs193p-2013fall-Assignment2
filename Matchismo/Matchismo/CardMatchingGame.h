@@ -16,7 +16,7 @@
 -(instancetype) initWithCardCount:(NSUInteger) count
                         usingDeck:(Deck *) deck;
 
--(void)chooseCardAtIndex:(NSUInteger)index;
+-(NSString *)chooseCardAtIndex:(NSUInteger)index;
 -(Card *)cardAtIndex:(NSUInteger)index;
 -(void)resetGame;
 -(void)setGameMode:(int) matchCount; //2 or 3 only - number of cards to match

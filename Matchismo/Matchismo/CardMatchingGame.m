@@ -25,7 +25,7 @@ static const int PARTIAL_MATCH = 2;
 @synthesize gameMode = _gameMode;
 
 -(int) gameMode {
-    if (!_gameMode) { _gameMode = 2; }
+    if (!_gameMode) { _gameMode = 3; }
     return _gameMode;
 }
 
@@ -81,8 +81,8 @@ static const int PARTIAL_MATCH = 2;
 
 
 
-- (void) chooseCardAtIndex:(NSUInteger)index {
-    
+- (NSString *) chooseCardAtIndex:(NSUInteger)index {
+    NSString * returnMsg = @"";
     Card *card = [self cardAtIndex:index];
     NSMutableArray * selectedCards = [[NSMutableArray alloc] init];
     
@@ -98,11 +98,13 @@ static const int PARTIAL_MATCH = 2;
                     //Add the card to the matched array (you need this for displaying attempts)
                     [selectedCards addObject:otherCard];
                     
+                    /*
                     int matchScore = [card match:(Card *)@[otherCard]];
                     if (matchScore) {
                         otherCard.matched = YES;
                         card.matched = YES;
                     }
+                     */
                     
                 }
             }
@@ -117,15 +119,18 @@ static const int PARTIAL_MATCH = 2;
                 
                 int matchScore = [card match:(Card *)selectedCards];  // send all selected cards to the matcher
 
-                NSLog(@"matchScore = %d", matchScore);
-
                 self.score += matchScore;
                 
                 //if there's a match, figure out score
                 if (matchScore) {
+                    card.matched = YES;
+
                     //if there were matches but matches were lower than possible, give partial credit
                     if (matchScore < (int)self.gameMode-1) {
                         self.score += matchScore * PARTIAL_MATCH;
+                        returnMsg = [NSString stringWithFormat:@"Matched %@ %@ for %d points!", card, [selectedCards  componentsJoinedByString:@" "], matchScore * PARTIAL_MATCH];
+                        
+                        NSLog(@"Matched %@ %@ for %d points!", card, [selectedCards  componentsJoinedByString:@" "], matchScore * PARTIAL_MATCH);
                     }
                     else { //give full bonus
                         self.score += matchScore * MATCH_BONUS;
@@ -151,7 +156,7 @@ static const int PARTIAL_MATCH = 2;
         self.score -= COST_TO_CHOOSE;
         card.chosen = YES;
     }
-    
+    return returnMsg;
 }
 
 

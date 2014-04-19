@@ -55,18 +55,20 @@ static const int MATCH_SUIT_SCORE = 1;
 {
     int score = 0;
 
-    
     if ([otherCards count] > 0) {
-        //Assuming one card for now
         for (PlayingCard * otherCard in otherCards) {
             if (otherCard.rank == self.rank) {
-                score = MATCH_RANK_SCORE;
+                score += MATCH_RANK_SCORE;
             } else if ([otherCard.suit isEqualToString:self.suit]) {
-                score = MATCH_SUIT_SCORE;
+                score += MATCH_SUIT_SCORE;
             }
         }
     }
     return score;
+}
+
+- (NSString *) description {
+    return self.contents;
 }
 
 

@@ -178,10 +178,18 @@
                                     <action selector="switchGameMode:" destination="vXZ-lx-hvc" eventType="valueChanged" id="UE1-gj-qkT"/>
                                 </connections>
                             </segmentedControl>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d4A-zF-iIZ">
+                                <rect key="frame" x="20" y="401" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
+                        <outlet property="resultLabel" destination="d4A-zF-iIZ" id="u8R-R6-GDQ"/>
                         <outlet property="scoreLabel" destination="iGz-BF-cXg" id="hkn-Z5-GRc"/>
                         <outletCollection property="cardButtons" destination="dv0-9M-DZt" id="kDG-sv-gyc"/>
                         <outletCollection property="cardButtons" destination="Ou6-Bw-uCG" id="DWQ-3s-oFk"/>
