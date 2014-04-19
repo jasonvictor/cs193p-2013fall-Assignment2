@@ -19,7 +19,7 @@
 -(void)chooseCardAtIndex:(NSUInteger)index;
 -(Card *)cardAtIndex:(NSUInteger)index;
 -(void)resetGame;
--(void)setGameMode:(NSNumber *) matchCount; //2 or 3 only - number of cards to match
+-(void)setGameMode:(int) matchCount; //2 or 3 only - number of cards to match
 
 @property (nonatomic, readonly) NSInteger score;
 

@@ -11,7 +11,7 @@
 @interface CardMatchingGame()
 @property (nonatomic, readwrite) NSInteger score;
 @property (nonatomic, strong) NSMutableArray *cards; //of card
-@property (nonatomic, strong) NSNumber * gameMode; //# of cards to match
+@property (nonatomic) int gameMode; //# of cards to match
 @end
 
 
@@ -21,6 +21,29 @@ static const int MISMATCH_PENALTY = 2;
 static const int MATCH_BONUS = 4;
 static const int COST_TO_CHOOSE = 1;
 static const int PARTIAL_MATCH = 2;
+
+@synthesize gameMode = _gameMode;
+
+-(int) gameMode {
+    if (!_gameMode) { _gameMode = 2; }
+    return _gameMode;
+}
+
+-(void) setGameMode:(int)matchCount {
+    //default is 2; 2 or 3 is valid; check for invalid values
+    _gameMode = 2;
+    
+    NSArray * validMatchModes = @[@2, @3];
+    
+    for (NSNumber *mode in validMatchModes) {
+        if ((int)mode == (int)matchCount) {
+            _gameMode = (int)mode;
+            break;
+        }
+    }
+    NSLog(@"game mode = %d matches", self.gameMode);
+}
+
 
 -(NSMutableArray *)cards {
     if (!_cards) _cards = [[NSMutableArray alloc] init];
@@ -32,25 +55,7 @@ static const int PARTIAL_MATCH = 2;
     self.cards = nil;
 }
 
--(void) setGameMode:(NSNumber *)matchCount {
-    //default is 2; 2 or 3 is valid; check for invalid values
-    _gameMode = @2;
-    
-    NSArray * validMatchModes = @[@2, @3];
-    
-    for (NSNumber *mode in validMatchModes) {
-        if ([mode isEqualToNumber:matchCount]) {
-            _gameMode = mode;
-            break;
-        }
-    }
-    NSLog(@"game mode = %@ matches", self.gameMode);
-}
 
--(NSNumber *) getGameMode {
-    if (!_gameMode) { _gameMode = @2; }
-    return _gameMode;
-}
 
 - (instancetype) initWithCardCount:(NSUInteger)count
                          usingDeck:(Deck *)deck
@@ -80,17 +85,12 @@ static const int PARTIAL_MATCH = 2;
     
     Card *card = [self cardAtIndex:index];
     NSMutableArray * selectedCards = [[NSMutableArray alloc] init];
-
-    /*
-    if (card) {
-        selectedCards = [[NSMutableArray alloc] initWithArray:@[card]];
-    }
-     */
     
     if (!card.isMatched) {
         if (card.isChosen) {
-            card.chosen = NO;
-        } else {
+            card.chosen = NO; // what does this do?
+        }
+        else {
             for (Card *otherCard in self.cards) {
                 
                 if (otherCard.isChosen && !otherCard.isMatched) {
@@ -107,35 +107,45 @@ static const int PARTIAL_MATCH = 2;
                 }
             }
             
-            int matchScore = [card match:(Card *)selectedCards];  // send all selected cards to the matcher
-            self.score += matchScore;
             
             
             //If enough cards are chosen...
-            if ((int)self.gameMode <= selectedCards.count-1) {
+            NSLog(@"selectedCardsCount = %d", selectedCards.count);
+            NSLog(@"gameMode = %d", self.gameMode);
+
+            if (selectedCards.count >= self.gameMode-1) {
+                
+                int matchScore = [card match:(Card *)selectedCards];  // send all selected cards to the matcher
+
+                NSLog(@"matchScore = %d", matchScore);
+
+                self.score += matchScore;
                 
                 //if there's a match, figure out score
                 if (matchScore) {
                     //if there were matches but matches were lower than possible, give partial credit
-                    if (matchScore < (int)self.gameMode) {
+                    if (matchScore < (int)self.gameMode-1) {
                         self.score += matchScore * PARTIAL_MATCH;
                     }
                     else { //give full bonus
                         self.score += matchScore * MATCH_BONUS;
                     }
                  
-                    //Mark
+                    //if any are matched, all can no longer be picked
+                    for (Card * selectedCard in selectedCards) {
+                        selectedCard.matched = YES;
+                    }
                     
-                } else {
+                } else { // no matches
+                    NSLog(@"No Matches");
                     self.score -= MISMATCH_PENALTY;
                     //Reset the cards
-                    //card.chosen = NO;
+                    
                     for (Card * notMatchingCard in selectedCards) {
-                        notMatchingCard.chosen = NO;
-                        //notMatchingCard.matched = NO;
+                        notMatchingCard.chosen = NO; //flip back over
+                        notMatchingCard.matched = NO;
                     }
                 }
-                
             }
         }
         self.score -= COST_TO_CHOOSE;
