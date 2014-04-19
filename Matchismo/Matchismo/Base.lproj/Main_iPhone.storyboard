@@ -188,6 +188,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
                         <outlet property="resultLabel" destination="d4A-zF-iIZ" id="u8R-R6-GDQ"/>
                         <outlet property="scoreLabel" destination="iGz-BF-cXg" id="hkn-Z5-GRc"/>

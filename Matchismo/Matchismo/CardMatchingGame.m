@@ -82,8 +82,8 @@ static const int PARTIAL_MATCH = 2;
 
 
 - (NSString *) chooseCardAtIndex:(NSUInteger)index {
-    NSString * returnMsg = @"";
     Card *card = [self cardAtIndex:index];
+    NSString * returnMsg = card.description;
     NSMutableArray * selectedCards = [[NSMutableArray alloc] init];
     
     if (!card.isMatched) {
@@ -97,6 +97,7 @@ static const int PARTIAL_MATCH = 2;
                     
                     //Add the card to the matched array (you need this for displaying attempts)
                     [selectedCards addObject:otherCard];
+                    returnMsg = [NSString stringWithFormat:@"%@%@",  [selectedCards  componentsJoinedByString:@" "], card];
                     
                     /*
                     int matchScore = [card match:(Card *)@[otherCard]];
@@ -110,16 +111,18 @@ static const int PARTIAL_MATCH = 2;
             }
             
             
-            
             //If enough cards are chosen...
             NSLog(@"selectedCardsCount = %d", selectedCards.count);
             NSLog(@"gameMode = %d", self.gameMode);
+            int changeInScore = 0;
 
+            //TO DO - fix bug here where gameMode isn't retaining it's value (always resetting back to 0)
             if (selectedCards.count >= self.gameMode-1) {
                 
                 int matchScore = [card match:(Card *)selectedCards];  // send all selected cards to the matcher
 
                 self.score += matchScore;
+                changeInScore += matchScore;
                 
                 //if there's a match, figure out score
                 if (matchScore) {
@@ -128,13 +131,14 @@ static const int PARTIAL_MATCH = 2;
                     //if there were matches but matches were lower than possible, give partial credit
                     if (matchScore < (int)self.gameMode-1) {
                         self.score += matchScore * PARTIAL_MATCH;
-                        returnMsg = [NSString stringWithFormat:@"Matched %@ %@ for %d points!", card, [selectedCards  componentsJoinedByString:@" "], matchScore * PARTIAL_MATCH];
-                        
-                        NSLog(@"Matched %@ %@ for %d points!", card, [selectedCards  componentsJoinedByString:@" "], matchScore * PARTIAL_MATCH);
+                        changeInScore += matchScore * PARTIAL_MATCH;
                     }
                     else { //give full bonus
                         self.score += matchScore * MATCH_BONUS;
+                        changeInScore += matchScore * MATCH_BONUS;
                     }
+
+                    returnMsg = [NSString stringWithFormat:@"%@%@ Matched for %d points!", [selectedCards  componentsJoinedByString:@" "], card, changeInScore];
                  
                     //if any are matched, all can no longer be picked
                     for (Card * selectedCard in selectedCards) {
@@ -142,8 +146,10 @@ static const int PARTIAL_MATCH = 2;
                     }
                     
                 } else { // no matches
-                    NSLog(@"No Matches");
                     self.score -= MISMATCH_PENALTY;
+
+                    returnMsg = [NSString stringWithFormat:@"%@%@ No Match %d penalty!", [selectedCards  componentsJoinedByString:@" "], card,MISMATCH_PENALTY];
+                    
                     //Reset the cards
                     
                     for (Card * notMatchingCard in selectedCards) {
