@@ -104,13 +104,6 @@ static const int PARTIAL_THRESHOLD = 10;
                     [selectedCards addObject:otherCard];
                     returnMsg = [NSString stringWithFormat:@"%@%@",  [selectedCards  componentsJoinedByString:@" "], card];
                     
-                    /*
-                    int matchScore = [card match:(Card *)@[otherCard]];
-                    if (matchScore) {
-                        otherCard.matched = YES;
-                        card.matched = YES;
-                    }
-                     */
                     
                 }
             }

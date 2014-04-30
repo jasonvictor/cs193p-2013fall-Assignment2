@@ -135,8 +135,6 @@
 				F18715C718B98D2F004A2583 /* Main_iPhone.storyboard */,
 				F18715F718B98DD4004A2583 /* GameCardViewController.h */,
 				F18715F818B98DD4004A2583 /* GameCardViewController.m */,
-				F18715CD18B98D2F004A2583 /* MatchismoViewController.h */,
-				F18715CE18B98D2F004A2583 /* MatchismoViewController.m */,
 				F18715D018B98D2F004A2583 /* Images.xcassets */,
 				F18715ED18B98D81004A2583 /* Model */,
 				F18715BC18B98D2F004A2583 /* Supporting Files */,
@@ -147,6 +145,8 @@
 		F18715BC18B98D2F004A2583 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F18715CD18B98D2F004A2583 /* MatchismoViewController.h */,
+				F18715CE18B98D2F004A2583 /* MatchismoViewController.m */,
 				F18715CA18B98D2F004A2583 /* Main_iPad.storyboard */,
 				F18715C418B98D2F004A2583 /* MatchismoAppDelegate.h */,
 				F18715C518B98D2F004A2583 /* MatchismoAppDelegate.m */,
