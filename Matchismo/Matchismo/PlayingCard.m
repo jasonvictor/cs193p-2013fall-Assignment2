@@ -60,22 +60,6 @@ static const int MATCH_SUIT_SCORE = 1;
 {
     int score = 0;
 
-    //Detects if the current card matches any of the ones in the array,
-    // but it doesn't detect if the cards in the array match with each other!
-
-    /* Old way ****
-    if ([otherCards count] > 0) {
-        for (PlayingCard * otherCard in otherCards) {
-            if (otherCard.rank == self.rank) {
-                score += MATCH_RANK_SCORE;
-            } else if ([otherCard.suit isEqualToString:self.suit]) {
-                score += MATCH_SUIT_SCORE;
-            }
-        }
-    }
-    ******    */
-
-    
     if ([otherCards count] > 0) {
 
         int totalCards = otherCards.count + 1;

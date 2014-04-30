@@ -5,8 +5,7 @@
 //  Created by Victor, Jason M on 2/21/14.
 //  Copyright (c) 2014 Victor, Jason M. All rights reserved.
 //
-// TODO - Fix bug - if first two cards are the match it counts as NOT matched.
-
+// TODO - Fix bug - redeal button resets game state
 
 #import "CardMatchingGame.h"
 
@@ -24,6 +23,7 @@ static const int MISMATCH_PENALTY = 2;
 static const int MATCH_BONUS = 4;
 static const int COST_TO_CHOOSE = 1;
 static const int PARTIAL_MATCH = 2;
+static const int PARTIAL_THRESHOLD = 10;
 
 @synthesize gameMode = _gameMode;
 
@@ -131,14 +131,14 @@ static const int PARTIAL_MATCH = 2;
                 if (matchScore) {
                     card.matched = YES;
 
-                    //if there were matches but matches were lower than possible, give partial credit
-                    if (matchScore < (int)self.gameMode-1) {
-                        self.score += matchScore * PARTIAL_MATCH;
-                        changeInScore += matchScore * PARTIAL_MATCH;
+                    //if there were matches but score is lower than some possible threshold, give partial credit
+                    if (matchScore < PARTIAL_THRESHOLD) {
+                        self.score += matchScore + PARTIAL_MATCH;
+                        changeInScore += matchScore + PARTIAL_MATCH;
                     }
                     else { //give full bonus
-                        self.score += matchScore * MATCH_BONUS;
-                        changeInScore += matchScore * MATCH_BONUS;
+                        self.score += matchScore + MATCH_BONUS;
+                        changeInScore += matchScore + MATCH_BONUS;
                     }
 
                     returnMsg = [NSString stringWithFormat:@"%@%@ Matched for %d points!", [selectedCards  componentsJoinedByString:@" "], card, changeInScore];
