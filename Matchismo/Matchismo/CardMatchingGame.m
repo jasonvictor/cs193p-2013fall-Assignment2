@@ -14,6 +14,7 @@
 @property (nonatomic) int gameMode; //# of cards to match
 @end
 
+#define DEFAULT_GAME_MODE 2;
 
 @implementation CardMatchingGame
 
@@ -25,22 +26,27 @@ static const int PARTIAL_MATCH = 2;
 @synthesize gameMode = _gameMode;
 
 -(int) gameMode {
-    if (!_gameMode) { _gameMode = 3; }
+    //TO DO - This isn't persisting... I think it needs to be a "strong" property which has to be an Object like NSNumber *
+    NSLog(@"gameMode before getter = %d", _gameMode);
+    if (!_gameMode) { _gameMode = 2; }
+    NSLog(@"gameMode after getter = %d", _gameMode);
     return _gameMode;
 }
 
 -(void) setGameMode:(int)matchCount {
     //default is 2; 2 or 3 is valid; check for invalid values
-    _gameMode = 2;
+    _gameMode = DEFAULT_GAME_MODE;
+    NSLog(@"MatchCount should be %d", matchCount);
     
     NSArray * validMatchModes = @[@2, @3];
     
     for (NSNumber *mode in validMatchModes) {
-        if ((int)mode == (int)matchCount) {
-            _gameMode = (int)mode;
+        if ([mode intValue] == matchCount) {
+            _gameMode = [mode intValue];
             break;
         }
     }
+    
     NSLog(@"game mode = %d matches", self.gameMode);
 }
 
@@ -80,6 +86,10 @@ static const int PARTIAL_MATCH = 2;
 }
 
 
+//Changed this to return a String with the results.
+// The game would know best the rules on scoring
+// Alternative approach would have been to keep a publically accessible property called "lastRestlt"
+// and allow the calling method get that separately.
 
 - (NSString *) chooseCardAtIndex:(NSUInteger)index {
     Card *card = [self cardAtIndex:index];
