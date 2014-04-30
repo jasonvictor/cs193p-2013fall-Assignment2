@@ -238,6 +238,7 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="gameModeSelecter" destination="Bct-kO-1gQ" id="bDu-WO-seH"/>
                         <outlet property="resultLabel" destination="d4A-zF-iIZ" id="u8R-R6-GDQ"/>
                         <outlet property="scoreLabel" destination="iGz-BF-cXg" id="hkn-Z5-GRc"/>
                         <outletCollection property="cardButtons" destination="dv0-9M-DZt" id="kDG-sv-gyc"/>

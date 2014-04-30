@@ -14,6 +14,7 @@
 @property (strong, nonatomic) CardMatchingGame *game;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *gameModeSelecter;
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
 @end
 
@@ -60,8 +61,10 @@
 
 - (void) redeal {
     [self.game resetGame];
+    self.resultLabel.text = @"";
     [self updateUI];
     self.game = nil;
+    [self.game setGameMode:(self.gameModeSelecter.selectedSegmentIndex+2)];
 }
 
 -(NSString *) titleForCard:(Card *)card {

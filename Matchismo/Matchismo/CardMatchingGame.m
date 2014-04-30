@@ -5,7 +5,6 @@
 //  Created by Victor, Jason M on 2/21/14.
 //  Copyright (c) 2014 Victor, Jason M. All rights reserved.
 //
-// TODO - Fix bug - redeal button resets game state
 
 #import "CardMatchingGame.h"
 
