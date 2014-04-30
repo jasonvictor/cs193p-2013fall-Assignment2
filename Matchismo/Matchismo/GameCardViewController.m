@@ -27,8 +27,8 @@
 
 - (IBAction)switchGameMode:(UISegmentedControl *)sender {
     //Note that the index starts at 0, so if our lowest mode is 2, we can simply add 2 to it
-    [self.game setGameMode:(sender.selectedSegmentIndex+2) ];
     [self redeal];
+    [self.game setGameMode:(sender.selectedSegmentIndex+2) ];
 }
 
 - (Deck *) createDeck {

@@ -26,17 +26,13 @@ static const int PARTIAL_MATCH = 2;
 @synthesize gameMode = _gameMode;
 
 -(int) gameMode {
-    //TO DO - This isn't persisting... I think it needs to be a "strong" property which has to be an Object like NSNumber *
-    NSLog(@"gameMode before getter = %d", _gameMode);
     if (!_gameMode) { _gameMode = 2; }
-    NSLog(@"gameMode after getter = %d", _gameMode);
     return _gameMode;
 }
 
 -(void) setGameMode:(int)matchCount {
-    //default is 2; 2 or 3 is valid; check for invalid values
+    // Check for invalid values
     _gameMode = DEFAULT_GAME_MODE;
-    NSLog(@"MatchCount should be %d", matchCount);
     
     NSArray * validMatchModes = @[@2, @3];
     
@@ -46,8 +42,6 @@ static const int PARTIAL_MATCH = 2;
             break;
         }
     }
-    
-    NSLog(@"game mode = %d matches", self.gameMode);
 }
 
 
@@ -122,11 +116,8 @@ static const int PARTIAL_MATCH = 2;
             
             
             //If enough cards are chosen...
-            NSLog(@"selectedCardsCount = %d", selectedCards.count);
-            NSLog(@"gameMode = %d", self.gameMode);
             int changeInScore = 0;
 
-            //TO DO - fix bug here where gameMode isn't retaining it's value (always resetting back to 0)
             if (selectedCards.count >= self.gameMode-1) {
                 
                 int matchScore = [card match:(Card *)selectedCards];  // send all selected cards to the matcher
