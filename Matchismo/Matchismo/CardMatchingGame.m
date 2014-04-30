@@ -5,6 +5,8 @@
 //  Created by Victor, Jason M on 2/21/14.
 //  Copyright (c) 2014 Victor, Jason M. All rights reserved.
 //
+// TODO - Fix bug - if first two cards are the match it counts as NOT matched.
+
 
 #import "CardMatchingGame.h"
 

@@ -28,6 +28,10 @@
     }
 }
 
+//Had to create a reusable way to get at the rank in an "object" form
+- (NSNumber *) rankNumber {
+    return [[NSNumber alloc] initWithUnsignedInteger:self.rank];
+}
 
 - (NSString *) suit {
     return _suit? _suit : @"?";
@@ -51,10 +55,15 @@
 static const int MATCH_RANK_SCORE = 4;
 static const int MATCH_SUIT_SCORE = 1;
 
+//Overridden to deal with playing card match detection
 -(int) match:(NSArray *) otherCards
 {
     int score = 0;
 
+    //Detects if the current card matches any of the ones in the array,
+    // but it doesn't detect if the cards in the array match with each other!
+
+    /* Old way ****
     if ([otherCards count] > 0) {
         for (PlayingCard * otherCard in otherCards) {
             if (otherCard.rank == self.rank) {
@@ -64,6 +73,33 @@ static const int MATCH_SUIT_SCORE = 1;
             }
         }
     }
+    ******    */
+
+    
+    if ([otherCards count] > 0) {
+
+        int totalCards = otherCards.count + 1;
+        NSCountedSet *rankSet = [[NSCountedSet alloc] init];
+        NSCountedSet *suitSet = [[NSCountedSet alloc] init];
+        [rankSet addObject:self.rankNumber];
+        [suitSet addObject:self.suit];
+        
+        //Put all Ranks in one "bag" & suits in another
+        for (PlayingCard * otherCard in otherCards) {
+            [rankSet addObject:otherCard.rankNumber];
+            [suitSet addObject:otherCard.suit];
+        }
+        
+        //How many Ranks and suits match?
+        // total cards - (# of unique items in the set) + 1
+        int rankMatches = totalCards - rankSet.count + 1;
+        int suitMatches = totalCards - suitSet.count + 1;
+        
+        if (rankMatches > 1) { score += MATCH_RANK_SCORE * rankMatches;}
+        else if (suitMatches > 1) { score += MATCH_SUIT_SCORE *suitMatches; }
+        
+    }
+    
     return score;
 }
 
