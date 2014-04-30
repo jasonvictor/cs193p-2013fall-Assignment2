@@ -41,6 +41,7 @@
 
     int chosenButtonIndex = [self.cardButtons indexOfObject:sender];
     self.resultLabel.text = [self.game chooseCardAtIndex:(int)chosenButtonIndex];
+    self.gameModeSelecter.enabled = FALSE;
     [self updateUI];
 }
 
@@ -64,6 +65,7 @@
     self.resultLabel.text = @"";
     [self updateUI];
     self.game = nil;
+    self.gameModeSelecter.enabled = TRUE;
     [self.game setGameMode:(self.gameModeSelecter.selectedSegmentIndex+2)];
 }
 
